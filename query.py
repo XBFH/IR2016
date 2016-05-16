@@ -54,7 +54,7 @@ for term in query_words:
             term = p.stem (term, 0, len(term)-1)
         if not os.path.isfile (collection+"_index/"+term):
            continue
-        f = open (collection+"_index/"+term, "r")
+        f = open (collection+"_index/"+term, "r",encoding="utf8")
         lines = f.readlines ()
         idf = 1
         if parameters.use_idf:

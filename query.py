@@ -105,10 +105,30 @@ def evaluationMap(orderedResults, queryRelevance):
   
    return precision
 
-def evaluationNDCG(topResults, queryRelevance) :
-  # TODO
-  return 0
+def calcDCG(relevanceList):
+   DCG = 0.0
+   for i in range(len(relevanceList)):
+      try:
+         DCG += float(relevanceList[i])/math.log(i)
+      except:
+         DCG += float(relevanceList[i])
+   return DCG
 
+def evaluationNDCG(topResults, queryRelevance) :
+  relevanceList = [] 
+  for res in topResults:
+     relevanceList.append(queryRelevance[int(res)-1])
+  
+  #Get ordinary DCG   
+  DCG = calcDCG(relevanceList)
+  
+  #Get IDCG
+  relevanceList.sort(reverse=True)
+  IDCG = calcDCG(relevanceList)
+  
+  #Get normalized DCG
+  nDCG = DCG/IDCG 
+  return nDCG
 
 # check parameter for collection name
 if len(sys.argv)<2:

@@ -20,14 +20,13 @@ def blindRelevance(topDocs, collection, N):
 
         #Get number of each term in each top result (tf)
         path = os.getcwd() + "\\" + collection
-        with open (path+"\\"+"document."+str(doc),"r", encoding="utf-8") as f:
+        with open (path+"\\"+"document."+str(doc),"r", encoding="utf-8",errors='ignore') as f:
             content = f.read()
             if parameters.case_folding:
                 content = content.lower()
 
             content     = re.sub (r'[^ a-zA-Z0-9]', ' ', content)
             content     = re.sub (r'\s+', ' ', content)
-            content     = unicodedata.normalize('NFKD', content).encode('ascii','ignore').decode('utf-8')
             words       = content.split (' ')
 
             #Get all the terms in a document and their frequencies

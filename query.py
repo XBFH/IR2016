@@ -92,7 +92,7 @@ def evaluationMap(orderedResults, queryRelevance):
   # TODO
   return 0
 
-def evaluationNDCG(topResults, queryRelevance) :
+def evaluationNDCG(topResults, queryRelevance):
   # TODO
   return 0
 

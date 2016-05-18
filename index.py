@@ -16,14 +16,23 @@ if len(sys.argv)==1:
    print ("Syntax: index.py <collection type: -f file, -d directory> <relative collection directory/name>\n * Directory (-d) contains multiple separate documents *")
    exit(0)
 
-collection  =   sys.argv[2]
-identifier  =   ''
-document    =   ''
-title       =   ''
-indocument  =   False
-intitle     =   False
-data        =   {}
-titles      =   {}
+collection        =   sys.argv[2]
+identifier        =   ''
+document          =   ''
+title             =   ''
+indocument        =   False
+intitle           =   False
+data              =   {}
+titles            =   {}
+reservedWords     =   {
+      "CON", "PRN", "AUX", "CLOCK$",
+      "NUL", "COM0", "COM1", "COM2",
+      "COM3", "COM4", "COM5", "COM6",
+      "COM7", "COM8", "COM9", "LPT0",
+      "LPT1", "LPT2", "LPT3", "LPT4",
+      "LPT5", "LPT6", "LPT7", "LPT8",
+      "LPT9"
+   }
 
 # Check to see if the inputted data is a directory (-d) or a file (-f)
 if (sys.argv[1] == "-f"):
@@ -69,13 +78,14 @@ elif (sys.argv[1] == "-d"):
          if mo:
                identifier = mo.group(0)
          # Use 'with' for automated closing of open files
-         with open(path + i, 'r',encoding='utf-8') as f:
+         with open(path + i, 'r',encoding='utf-8',errors='ignore') as f:
                content      = f.read()
                title        = content.strip()[:-1][:50]
                # Add aproximate data heading to title array
                title = re.sub(r'\n.*', '', title)
                title = re.sub(r'\_', ' ', title)
-               title = unicodedata.normalize('NFKD', title).encode('ascii','ignore').decode('utf-8')
+               title = re.sub(r'[^ a-zA-Z0-9]', ' ', title)
+               #title = unicodedata.normalize('NFKD', title).encode('ascii','ignore').decode('utf-8')
                titles[identifier] = title
                # If case folding is true, convert the body to lower case text
                if parameters.case_folding:
@@ -119,10 +129,11 @@ try:
 except:
    pass
 for key in index:
-   f = open (collection+"_index/"+key, "w")
-   for entry in index[key]:
-      print (entry, index[key][entry], sep=':', file=f)
-   f.close ()
+   if (key.upper() not in reservedWords):
+      f = open (collection+"_index/"+key, "w")
+      for entry in index[key]:
+         print (entry, index[key][entry], sep=':', file=f)
+      f.close ()
 
 # write N
 f = open (collection+"_index_N", "w")

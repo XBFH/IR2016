@@ -1,0 +1,54 @@
+6
+Evaluating search results...
+Precision	NDCG	Query
+0.900		0.955	types of data structures
+0.800		0.848	avl trees java
+1.000		0.960	traversing a binary tree
+1.000		1.000	topological sort
+0.400		0.884	hashing algorithm
+MAP = 		0.820
+Avg NDCG = 	0.929
+
+7
+Evaluating search results...
+Precision	NDCG	Query
+0.900		0.873	apple ios vs google android
+0.400		0.444	social media mobile app
+1.000		0.882	mobile apps
+0.600		0.791	smartphone hardware features
+0.500		0.564	mobile operating system security
+MAP = 		0.680
+Avg NDCG = 	0.711
+
+8
+Evaluating search results...
+Precision	NDCG	Query
+0.900		0.957	advantages of hash tables
+0.800		0.759	what is a record data structure
+0.900		0.802	circularly linked lists vs linearly linked list
+1.000		0.871	traverse a binary tree
+0.800		0.964	what is a binary heap
+MAP = 		0.880
+Avg NDCG = 	0.871
+
+9
+Evaluating search results...
+Precision	NDCG	Query
+0.700		0.894	linked list
+0.300		0.776	big o heapsort
+0.700		0.710	binary tree efficiency
+0.700		0.771	directed acyclic graph
+0.800		0.872	hash table collision techniques
+MAP = 		0.640
+Avg NDCG = 	0.804
+
+11
+Evaluating search results...
+Precision	NDCG	Query
+0.400		0.462	data structures python
+0.600		0.616	types of wireless networks
+0.900		0.877	encryption algorithms
+1.000		0.901	cloud computing infrastructure as a service
+0.900		0.868	osi stack layers
+MAP = 		0.760
+Avg NDCG = 	0.745

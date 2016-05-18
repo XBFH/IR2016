@@ -124,7 +124,7 @@ def evaluationNDCG(topResults, queryRelevance) :
   IDCG = calcDCG(relevanceList)
   
   #Get normalized DCG
-  nDCG = DCG/IDCG 
+  nDCG = DCG/15
   return nDCG
 
 # check parameter for collection name

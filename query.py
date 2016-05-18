@@ -72,15 +72,25 @@ def performQuery():
    result = sorted (accum, key=accum.__getitem__, reverse=True)
    topResults = []
    for i in range (min (len (result), 10)):
-      topResults.append(result[i])
+         topResults.append(result[i])
       
    return topResults, N, titles, accum
 
 
 
-
-
-
+def removeStopwords(query_words):
+   query_words = [a for a in query_words if a]
+   if parameters.stopwords:
+      f = open ("stopwords", "r")
+      stopwords = f.readlines ()
+      f.close ()
+      for sw in stopwords:
+         sw = sw.replace("\n","")
+         if (sw in query_words):
+            query_words.remove(sw)
+   return query_words
+         
+         
 
 # check parameter for collection name
 if len(sys.argv)<3:
@@ -102,6 +112,9 @@ query = re.sub (r'[^ a-zA-Z0-9]', ' ', query)
 query = re.sub (r'\s+', ' ', query)
 query_words = query.split (' ')
 
+#Remove stopwords
+query_words = removeStopwords(query_words)
+
 #Perform inital query
 N = 0
 titles = {}
@@ -111,6 +124,9 @@ topResults, N, titles, accum = performQuery()
 #Perform blind relevance
 if (parameters.blind_relevance):
    query_words += blind_relevance.blindRelevance(topResults,collection,N)
+    
+   #Remove stopwords
+   query_words = removeStopwords(query_words)   
    topResults, N, titles, accum = performQuery()
    
 for i in range(len(topResults)):

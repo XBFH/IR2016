@@ -9,3 +9,4 @@ log_tf = True
 use_idf = True
 log_idf = True
 blind_relevance = True
+stopwords = True

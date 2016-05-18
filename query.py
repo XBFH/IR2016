@@ -139,6 +139,7 @@ path              = os.getcwd() + "\\" + collection + "\\"
 query_relevance   = []
 query_index       = 0
 MAP_accum         = 0
+NDCG_accum        = 0
 
 # Check for evaluation flag
 if (sys.argv[1] == '-e'):
@@ -200,6 +201,7 @@ for query in queries:
     evaluation_MAP    = evaluationMap(topResults, query_relevance[query_index])
     MAP_accum += evaluation_MAP
     evaluation_NDCG   = evaluationNDCG(topResults, query_relevance[query_index]) 
+    NDCG_accum += evaluation_NDCG
     print("{1:.3f}\t\t{2:.3f}\t{0}".format (query, evaluation_MAP, evaluation_NDCG))
     # Progress the query index to next query
     query_index += 1
@@ -208,5 +210,5 @@ for query in queries:
       print("{0:10.8f} {1:5} {2}".format (accum[topResults[i]], topResults[i], titles[topResults[i]]))
 
 if(evaluation):
-   print("MAP = ", MAP_accum/len(queries))
-   
+   print("{0}\t\t{1:.3f}".format ("MAP = ", MAP_accum/len(queries)))
+   print("{0}\t{1:.3f}".format ("Avg NDCG = ", NDCG_accum/len(queries)))

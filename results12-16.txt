@@ -1,6 +1,6 @@
 BEFORE:
 
-C:\Users\Nic\Desktop\IR1b\IR2016>python query.py -e testbed12
+12:
 Evaluating search results...
 Precision       NDCG    Query
 1.000           1.000   npm install
@@ -12,7 +12,7 @@ MAP =           0.680
 Avg NDCG =      0.832
 
 
-C:\Users\Nic\Desktop\IR1b\IR2016>python query.py -e testbed13
+13:
 Evaluating search results...
 Precision       NDCG    Query
 0.700           0.716   what can quantum computers do
@@ -23,7 +23,7 @@ Precision       NDCG    Query
 MAP =           0.540
 Avg NDCG =      0.511
 
-C:\Users\Nic\Desktop\IR1b\IR2016>python query.py -e testbed14
+14:
 Evaluating search results...
 Precision       NDCG    Query
 0.800           0.870   owl 2 web ontology language
@@ -35,7 +35,7 @@ MAP =           0.940
 Avg NDCG =      0.901
 
 
-C:\Users\Nic\Desktop\IR1b\IR2016>python query.py -e testbed15
+15:
 Evaluating search results...
 Precision       NDCG    Query
 0.600           0.796   what is cgi
@@ -47,7 +47,7 @@ MAP =           0.560
 Avg NDCG =      0.743
 
 
-C:\Users\Nic\Desktop\IR1b\IR2016>python query.py -e testbed16
+16:
 Evaluating search results...
 Precision       NDCG    Query
 0.400           0.878   cloud companies review
@@ -57,9 +57,12 @@ Precision       NDCG    Query
 0.500           0.774   cloud service packages
 MAP =           0.440
 Avg NDCG =      0.826
+
 __________________________________________________________________________________________________________________________________________________________________________________________
 AFTER:
-C:\Users\Nic\Desktop\IR1b\IR2016>python query.py -e testbed12
+
+
+12:
 Evaluating search results...
 Precision       NDCG    Query
 1.000           1.000   npm install
@@ -71,7 +74,7 @@ MAP =           0.680
 Avg NDCG =      0.756
 
 
-C:\Users\Nic\Desktop\IR1b\IR2016>python query.py -e testbed13
+13:
 Evaluating search results...
 Precision       NDCG    Query
 0.800           0.746   what can quantum computers do
@@ -83,7 +86,7 @@ MAP =           0.600
 Avg NDCG =      0.667
 
 
-C:\Users\Nic\Desktop\IR1b\IR2016>python query.py -e testbed14
+14:
 Evaluating search results...
 Precision       NDCG    Query
 0.800           0.715   owl 2 web ontology language
@@ -95,7 +98,7 @@ MAP =           0.940
 Avg NDCG =      0.862
 
 
-C:\Users\Nic\Desktop\IR1b\IR2016>python query.py -e testbed15
+15:
 Evaluating search results...
 Precision       NDCG    Query
 0.400           0.725   what is cgi
@@ -106,8 +109,7 @@ Precision       NDCG    Query
 MAP =           0.580
 Avg NDCG =      0.698
 
-
-C:\Users\Nic\Desktop\IR1b\IR2016>python query.py -e testbed16
+16:
 Evaluating search results...
 Precision       NDCG    Query
 0.400           0.965   cloud companies review

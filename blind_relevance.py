@@ -45,7 +45,7 @@ def blindRelevance(topDocs, collection, N):
             f = open (path+"_index"+"\\"+str(term),"r")
             content = f.readlines()
             f.close()         
-            idf = math.log(N/len(content))
+            idf = math.log(1+(N/len(content)))
             
             tfidf[term] = counts[term]*idf
         

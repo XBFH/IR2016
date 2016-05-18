@@ -90,7 +90,7 @@ def removeStopwords(query_words):
 
 def evaluationMap(orderedResults, queryRelevance):
    count=0
-   lineNumber=0
+   lineNumber=1
    docNumbers=[]
    for docNum in queryRelevance:
       if(docNum=="1" or docNum=="2"):
@@ -106,12 +106,9 @@ def evaluationMap(orderedResults, queryRelevance):
    return precision
 
 def calcDCG(relevanceList):
-   DCG = 0.0
-   for i in range(len(relevanceList)):
-      try:
-         DCG += float(relevanceList[i])/math.log(i)
-      except:
-         DCG += float(relevanceList[i])
+   DCG = float(relevanceList[0])
+   for i in range(len(relevanceList)-1):
+      DCG += float(relevanceList[i+1])/math.log((i+2))
    return DCG
 
 def evaluationNDCG(topResults, queryRelevance) :
@@ -203,7 +200,7 @@ for query in queries:
     evaluation_MAP    = evaluationMap(topResults, query_relevance[query_index])
     MAP_accum += evaluation_MAP
     evaluation_NDCG   = evaluationNDCG(topResults, query_relevance[query_index]) 
-    print("{1:.3f}\t{2:.3f}\t{0}".format (query, evaluation_MAP, evaluation_NDCG))
+    print("{1:.3f}\t\t{2:.3f}\t{0}".format (query, evaluation_MAP, evaluation_NDCG))
     # Progress the query index to next query
     query_index += 1
   else:

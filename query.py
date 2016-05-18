@@ -89,8 +89,21 @@ def removeStopwords(query_words):
   return query_words
 
 def evaluationMap(orderedResults, queryRelevance):
-  # TODO
-  return 0
+   count=0
+   lineNumber=0
+   docNumbers=[]
+   for docNum in queryRelevance:
+      if(docNum=="1" or docNum=="2"):
+         count+=1
+         docNumbers.append((str)(lineNumber))
+      lineNumber+=1
+      
+   count=queryRelevance.count("1")+queryRelevance.count("2")
+   s1 = set(orderedResults)
+   b3 = [val for val in  docNumbers if val in orderedResults]
+   precision = len(b3)/len(orderedResults)
+  
+   return precision
 
 def evaluationNDCG(topResults, queryRelevance) :
   # TODO
@@ -108,6 +121,7 @@ evaluation        = False
 path              = os.getcwd() + "\\" + collection + "\\"
 query_relevance   = []
 query_index       = 0
+MAP_accum         = 0
 
 # Check for evaluation flag
 if (sys.argv[1] == '-e'):
@@ -126,7 +140,7 @@ if (sys.argv[1] == '-e'):
           queries.append(f.read().strip())
         with open(path + "relevance." + query_number, 'r',encoding="utf-8") as g:
           query_relevance.append(g.read().split('\n'))
-  print("MAP\tNDCG\tQuery")
+  print("Precision\tNDCG\tQuery")
 
 elif (sys.argv[1] == '-s'):
   arg_index = 3
@@ -167,6 +181,7 @@ for query in queries:
   if (evaluation):
     # Perform evaluation
     evaluation_MAP    = evaluationMap(topResults, query_relevance[query_index])
+    MAP_accum += evaluation_MAP
     evaluation_NDCG   = evaluationNDCG(topResults, query_relevance[query_index]) 
     print("{1:.3f}\t{2:.3f}\t{0}".format (query, evaluation_MAP, evaluation_NDCG))
     # Progress the query index to next query
@@ -174,3 +189,7 @@ for query in queries:
   else:
     for i in range(len(topResults)):
       print("{0:10.8f} {1:5} {2}".format (accum[topResults[i]], topResults[i], titles[topResults[i]]))
+
+if(evaluation):
+   print("MAP = ", MAP_accum/len(queries))
+   

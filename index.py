@@ -9,6 +9,7 @@ import sys
 import porter
 
 import parameters
+import unicodedata
 
 # check parameter for collection name
 if len(sys.argv)==1:
@@ -68,14 +69,14 @@ elif (sys.argv[1] == "-d"):
          if mo:
                identifier = mo.group(0)
          # Use 'with' for automated closing of open files
-         with open(path + i, 'r',encoding="utf8") as f:
-               content =   f.read()
-               title  =   content[:-1][:50]
+         with open(path + i, 'r',encoding='utf-8') as f:
+               content      = f.read()
+               title        = content.strip()[:-1][:50]
                # Add aproximate data heading to title array
                title = re.sub(r'\n.*', '', title)
                title = re.sub(r'\_', ' ', title)
+               title = unicodedata.normalize('NFKD', title).encode('ascii','ignore').decode('utf-8')
                titles[identifier] = title
-               print(titles[identifier])
                # If case folding is true, convert the body to lower case text
                if parameters.case_folding:
                   content = content.lower()

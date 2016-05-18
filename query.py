@@ -53,9 +53,9 @@ def performQuery():
                      accum[file_id] = 0
                   if parameters.log_tf:
                      tf = (1 + math.log (tf))
-                  accum[file_id] += (tf * idf)
+                  accum[file_id] += (tf * idf)                           
          f.close()
-   
+      
    # parse lengths data and divide by |N| and get titles
    for l in lengths:
       mo = re.match (r'([0-9]+)\:([0-9\.]+)\:(.+)', l)

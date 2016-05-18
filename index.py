@@ -60,9 +60,9 @@ if (sys.argv[1] == "-f"):
                         document += line    
    f.close ()
 elif (sys.argv[1] == "-d"):
-   path = os.getcwd() + "\\" + collection + "\\";
+   path = os.getcwd() + "\\" + collection + "\\"
    for i in os.listdir(path):
-        # Only open documents and not the queries/relevance files
+      # Only open documents and not the queries/relevance files
       if i.startswith("document"):
          mo = re.search(r'[0-9]+', i)
          # Get the document identification number

@@ -87,31 +87,61 @@ def removeStopwords(query_words):
       if (sw in query_words):
         query_words.remove(sw)
   return query_words
-         
-         
+
+def evaluationMap(orderedResults, queryRelevance):
+  # TODO
+  return 0
+
+def evaluationNDCG(topResults, queryRelevance) :
+  # TODO
+  return 0
+
 
 # check parameter for collection name
 if len(sys.argv)<2:
    print ("Syntax: query.py <flag> <collection> <query>\n\t-e for evaluation with NDCG & MAP\n\t-s to search for a <query>")
    exit(0)
 
+collection        = sys.argv[2]
+queries           = []
+evaluation        = False
+path              = os.getcwd() + "\\" + collection + "\\"
+query_relevance   = []
+query_index       = 0
+
 # Check for evaluation flag
 if (sys.argv[1] == '-e'):
   print("Evaluating search results...")
-  collection    = sys.argv[2]
+  evaluation = True
+  
+  # Load in queries
+  for file_in in os.listdir(path):
+    if file_in.startswith("query"):
+      mo = re.search(r'[0-9]+', file_in)
+      # Get the document identification number
+      if mo:
+        query_number = mo.group(0)
+        # Use 'with' for automated closing of open files
+        with open(path + file_in, 'r',encoding='utf-8') as f:
+          queries.append(f.read().strip())
+        with open(path + "relevance." + query_number, 'r',encoding="utf-8") as g:
+          query_relevance.append(g.read().split('\n'))
+  print("MAP\tNDCG\tQuery")
 
-elif (sys.argv[1] == '-s'): 
+elif (sys.argv[1] == '-s'):
+  arg_index = 3
+
   # construct collection and query
-  collection    = sys.argv[2]
-  query         = ''
-  arg_index     = 3
-  while arg_index < len(sys.argv):    
-    query += sys.argv[arg_index] + ' '
+  queries.append(sys.argv[arg_index] + ' ')
+  arg_index += 1
+  while arg_index < len(sys.argv):
+    queries[0] += sys.argv[arg_index] + ' '
     arg_index += 1
+
+for query in queries:
   # clean query
   if parameters.case_folding:
-    query = query.lower ()
-
+    query = query.lower () 
   query = re.sub (r'[^ a-zA-Z0-9]', ' ', query)
   query = re.sub (r'\s+', ' ', query)
   query_words = query.split (' ')
@@ -121,9 +151,9 @@ elif (sys.argv[1] == '-s'):
     query_words = removeStopwords(query_words)
 
   #Perform inital query
-  N = 0
-  titles = {}
-  accum = {}
+  N         = 0
+  titles    = {}
+  accum     = {}
   topResults, N, titles, accum = performQuery()
 
   #Perform blind relevance
@@ -134,5 +164,13 @@ elif (sys.argv[1] == '-s'):
       query_words = removeStopwords(query_words)
     topResults, N, titles, accum = performQuery()
 
-  for i in range(len(topResults)):
-    print("{0:10.8f} {1:5} {2}".format (accum[topResults[i]], topResults[i], titles[topResults[i]]))
+  if (evaluation):
+    # Perform evaluation
+    evaluation_MAP    = evaluationMap(topResults, query_relevance[query_index])
+    evaluation_NDCG   = evaluationNDCG(topResults, query_relevance[query_index]) 
+    print("{1:.3f}\t{2:.3f}\t{0}".format (query, evaluation_MAP, evaluation_NDCG))
+    # Progress the query index to next query
+    query_index += 1
+  else:
+    for i in range(len(topResults)):
+      print("{0:10.8f} {1:5} {2}".format (accum[topResults[i]], topResults[i], titles[topResults[i]]))

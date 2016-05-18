@@ -1,0 +1,104 @@
+----------------------------------------------------------
+-----------------------BEFORE-----------------------------
+----------------------------------------------------------
+*1*
+Precision       NDCG    Query
+1.000           0.988   html5
+0.400           0.656   hello world
+0.300           0.616   how do i fix graphics card driver
+0.800           0.834   computer games
+0.900           0.914   fortran
+MAP =           0.680
+Avg NDCG =      0.802
+
+*2*
+Precision       NDCG    Query
+0.300           0.670   advantages of neuroevolution approach to machine learning
+0.500           0.792   function of artificial neural networks
+0.700           0.838   difference between supervised and unsupervised learning algorithms
+0.400           0.591   applications of machine learning
+0.400           0.616   machine learning approaches
+MAP =           0.460
+Avg NDCG =      0.702
+
+*3*
+Precision       NDCG    Query
+1.000           0.972   modem problems
+0.700           0.868   cpu performance
+0.600           0.872   bbs boards
+0.400           0.508   dangerous hardware software
+0.600           0.738   hard drive capacity
+MAP =           0.660
+Avg NDCG =      0.791
+
+*4*
+Precision       NDCG    Query
+0.600           1.064   3d mash optimisation technique
+0.800           0.966   introduction to image processing
+0.700           0.807   geomerty for computer graphics
+1.000           1.000   occlusion culling
+0.800           0.996   phong shading
+MAP =           0.780
+Avg NDCG =      0.967
+
+*5*
+Precision       NDCG    Query
+0.300           0.586   functional programming languages
+0.600           0.949   most popular programming languages
+0.300           0.818   ios programming
+0.100           0.514   highest paying job by programming language
+0.200           0.782   creators of programming languages
+MAP =           0.300
+Avg NDCG =      0.730
+----------------------------------------------------------
+-----------------------AFTER------------------------------
+----------------------------------------------------------
+*1*
+Precision       NDCG    Query
+1.000           0.994   html5
+0.400           0.545   hello world
+0.300           0.534   how do i fix graphics card driver
+0.900           0.929   computer games
+0.900           0.846   fortran
+MAP =           0.700
+Avg NDCG =      0.770
+
+*2*
+Precision       NDCG    Query
+0.400           0.503   advantages of neuroevolution approach to machine learning
+0.500           0.530   function of artificial neural networks
+0.700           0.798   difference between supervised and unsupervised learning algorithms
+0.400           0.719   applications of machine learning
+0.400           0.554   machine learning approaches
+MAP =           0.480
+Avg NDCG =      0.621
+
+*3*
+Precision       NDCG    Query
+1.000           0.862   modem problems
+0.700           0.812   cpu performance
+0.600           0.805   bbs boards
+0.400           0.653   dangerous hardware software
+0.600           0.563   hard drive capacity
+MAP =           0.660
+Avg NDCG =      0.739
+
+*4*
+Precision       NDCG    Query
+0.600           0.945   3d mash optimisation technique
+0.900           0.948   introduction to image processing
+0.700           0.907   geomerty for computer graphics
+1.000           1.000   occlusion culling
+0.800           0.996   phong shading
+MAP =           0.800
+Avg NDCG =      0.959
+
+*5*
+Precision       NDCG    Query
+0.300           0.488   functional programming languages
+0.600           0.670   most popular programming languages
+0.300           0.454   ios programming
+0.100           0.434   highest paying job by programming language
+0.300           0.451   creators of programming languages
+MAP =           0.320
+Avg NDCG =      0.499

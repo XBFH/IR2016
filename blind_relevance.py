@@ -17,7 +17,6 @@ def blindRelevance(topDocs, collection, N):
     p              = porter.PorterStemmer ()
 	
     for doc in topDocs:
-        counts = {}
 
         #Get number of each term in each top result (tf)
         path = os.getcwd() + "\\" + collection
@@ -30,29 +29,43 @@ def blindRelevance(topDocs, collection, N):
             content     = re.sub (r'\s+', ' ', content)
             content     = unicodedata.normalize('NFKD', content).encode('ascii','ignore').decode('utf-8')
             words       = content.split (' ')
-            doc_length  = 0
 
+            #Get all the terms in a document and their frequencies
+            terms = {}
             for word in words:
                 if word != '':
                     if parameters.stemming:
                         word = p.stem (word, 0, len(word)-1)
-                    if (word in counts):
-                        counts[word] += 1
+                    
+                    if (word not in terms):
+                        terms[word] = 1
                     else:
-                        counts[word] = 1       
-		
-            #Get the tf.idf for each term in the document
+                        terms[word] += 1
+            
+            #Work out tfidf for each term            
             tfidf = {}
-            for term in counts.keys():
-                with open (path+"_index"+"\\"+str(term),"r") as f2:
-                    content = f2.readlines()
-                    idf = math.log(N/len(content))
-                    tfidf[term] = counts[term]*idf
+            for term in terms:
+                tf = terms[term]
+                idf = 1
+                if parameters.use_idf:
+                    if not os.path.isfile (collection+"_index/"+term):
+                        continue
+                    with open (collection+"_index/"+term, "r",encoding="utf8") as l:                    
+                        df = len(l.readlines())
+                        idf = 1/df
+                        if parameters.log_idf:
+                            idf = math.log (1 + N/df)
+                        
+                    if not term in tfidf:
+                        tfidf[term] = 0
+                    if parameters.log_tf:
+                        tf = (1 + math.log (tf))
+                    tfidf[term] += (tf * idf)
 
-                #Add top 20 to the result query
-                result = sorted (tfidf, key=tfidf.__getitem__, reverse=True)
-                for i in range (min (len (result), 20)):        
-                    if (result[i] not in query_words):
-                        query_words.append(result[i])
-
+            #Add top 20 to the result query
+            result = sorted (tfidf, key=tfidf.__getitem__, reverse=True)
+            for i in range (min (len (result), 20)):        
+                if (result[i] not in query_words):
+                    query_words.append(result[i])
+                    
     return query_words
